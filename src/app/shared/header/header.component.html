@@ -1,1 +1,36 @@
-<p>header works!</p>
+<header id="site-header">
+    <!-- Barra de promoções -->
+    <div class="top-bar">
+        <marquee behavior="D" direction="right">A partir de agora, você recebe 10% de cashback em todas as suas compras!</marquee>
+    </div>
+
+    <!-- Header Principal -->
+    <nav>
+        <div class="header__container">
+            <div class="header__logo">
+                <h1 class="header__brand">Street Business</h1>
+                <span class="header__tagline">identidade em movimento</span>
+            </div>
+
+            <form class="header__search" action="#" method="get">
+                <input class="header__search-input" id="txtBusca" type="text" placeholder="Pesquisar..." name="q">
+                <button class="header__search-btn" type="button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5 5.806 2 10.5 2 19 5.806 19 10.5Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+        <!-- Login e Carrinho -->
+        <div class="header__actions">
+            <button class="header__action-btn" id="btnLogin">
+               <a href="login.html"><span>Entrar</span></a> 
+            </button>
+            <button class="header__action-btn" id="btnCompras">
+                <a href="#  "><span>Carrinho</span></a> 
+            </button>
+        </div>
+    </nav>
+</header>

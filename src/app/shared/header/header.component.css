@@ -1,0 +1,109 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #282627;
+    padding: 1rem 2.5rem; /* tamanho do espaço da header em relação a fonte*/
+    font-family: 'Alexandria', sans-serif;
+    color: #ffffff;
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* espaço entre o logo e busca */
+    flex-grow: 1; /* permite que a barra de busca cresça */
+}
+
+.header__brand {
+    color: #D5AD3B;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.header__tagline {
+    color: #D5AD3B;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin: 2.7rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.header__search {
+    display: flex;
+    align-items: center;
+    background-color: #424242;
+    border-radius: 25px;
+    padding: 0.3rem 1rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.header__search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    color: #ffffff;
+    font-size: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.header__search-input::placeholder {
+    color: #a0a0a0;
+}
+
+.header__search-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header__action-btn a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;   
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.header__action-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.header__action-btn a:hover {
+    color: #D5AD3B; /* muda a cor para amarelo quando passa o mouse */
+}
+
+.top-bar {
+    background-color: #D5AD3B;
+    color: #212121;
+    padding: 0.6rem 0;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.top-bar marquee {
+    margin: 0;
+    padding: 0;
+}

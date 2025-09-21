@@ -4,10 +4,12 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { HeaderComponent } from './shared/header/header.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ProdCadastroComponent } from './pages/prod-cadastro/prod-cadastro.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LandingPageComponent, HeaderComponent, NavComponent, FooterComponent],
+  imports: [RouterOutlet, LandingPageComponent, HeaderComponent, 
+    NavComponent, FooterComponent, ProdCadastroComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

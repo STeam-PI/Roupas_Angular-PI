@@ -12,7 +12,7 @@
 }
 
 .subtitle {
-    margin-top: 28px;
+    margin-top: 25px;
     font-size: 12px;
     color: #8c8c8c;
     margin-bottom: -3px; 
@@ -79,20 +79,20 @@ button {
     height: 30px; /* Ajustar a altura */
 }
 
-button.edit {
+.edit {
     background: #f39c12;
     margin-right: 4px;
 }
 
-button.edit:hover {
+.edit:hover {
     background-color: #e67e22;
 }
 
-button.delete {
+.delete {
     background: #e74c3c;
 }
 
-button.delete:hover {
+.delete:hover {
     background-color: #c0392b;
 }
 

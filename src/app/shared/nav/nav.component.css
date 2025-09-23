@@ -1,10 +1,16 @@
-.nav {
-  padding: 0.8rem 1.5rem;
+nav {
+  padding: 0.8rem 0;
   /* tamanho da área do nav baseado no tamanho da fonte */
   /* linha para separar da heade */
   display: flex;
   justify-content: center;
-  /* centralizar */
+  width: 100%;
+}
+
+.item-5 {
+  @media (max-width: 1700px) {
+    display: none;
+  }
 }
 
 .nav-list {

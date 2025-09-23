@@ -1,0 +1,69 @@
+nav {
+  padding: 0.8rem 0;
+  /* tamanho da área do nav baseado no tamanho da fonte */
+  /* linha para separar da heade */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.item-5 {
+  @media (max-width: 1700px) {
+    display: none;
+  }
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* alinhar os itens um ao lado do outro */
+  gap: 3rem;
+  /* espaço entre as opçoes do menu */
+}
+
+.nav__link {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Alexandria', sans-serif;
+  font-size: 25px;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  position: relative;
+  /* para a linha embaixo da escrita */
+  transition: color 0.3s ease;
+}
+
+.nav__link:hover {
+  /* efeito para quando passar o mouse em cima */
+  color: #D5AD3B;
+  /* muda a cor para o amarelo base do projeto */
+}
+
+.nav__item--active .nav__link {
+  /* efeito para deixar o item selecionado amarelo */
+  color: #D5AD3B;
+  font-weight: 600;
+  /* O item ativo já fica com a cor amarela */
+}
+
+.nav__link::after {
+  /* efeito para aparecer linha embaixo do item ao passar o mouse */
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #D5AD3B;
+  transform: scaleX(0);
+  /* tamanho da linha começa com 0 */
+  transition: transform 0.3s ease;
+  /* animação */
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+  /* deixa a linha do tamanho do item */
+}

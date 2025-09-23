@@ -1,0 +1,47 @@
+footer {
+  background: #282627;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px 0;
+  color: #fff;
+}
+
+.spacer {
+  width: 1px;
+  height: 231px;
+  background-color: #fff;
+  margin: 0 40px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  margin-bottom: 32px;
+  text-shadow: 0px 1px 20px black;
+}
+
+.contato li {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.formas-pagamento {
+  display: flex;
+  align-items: center;
+}
+
+.formas-pagamento img {
+  height: 120px;
+  margin-right: 10px;
+  object-fit: cover;
+}

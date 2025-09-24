@@ -191,12 +191,7 @@ h1 {
   background: #e6e6e6;
 }
 
-.item-colors input[type="color"]::-webkit-color-swatch {
-  border-radius: 50%;
-  border: none;
-}
-
-.item-colors input[type="color"]::-moz-color-swatch {
+.item-colors input[type="color"] {
   border-radius: 50%;
   border: none;
 }

@@ -18,8 +18,7 @@ export class ProdAddComponent implements AfterViewInit {
         const reader = new FileReader();
         reader.onload = e => {
           const imageUrl = e.target?.result as string;
-
-          // Define a imagem como fundo da área
+          
           uploadArea.style.backgroundImage = `url('${imageUrl}')`;
           uploadArea.classList.add("has-image");
         };

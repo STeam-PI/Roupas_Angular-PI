@@ -101,12 +101,19 @@ h1 {
   flex-direction: column;
 }
 
+.item-details input[type="text"], input[type="number"] {
+  background-color: #dad8d8;
+  border-style:solid;
+  border-color: #dad8d8;
+  border-radius: 5px;
+  padding: 4px;
+}
+
 .item-name {
   margin: 0;
   font-size: 1.6rem;
   font-weight: bold;
   width: 82%;
-  padding: 5px;
 }
 
 .item-id {
@@ -126,7 +133,8 @@ h1 {
 
 .item-value {
   margin: 0;
-  color: #333;
+  color: #111010;
+  font-weight: bold;
   font-size: 1.1rem;
   width: 90px;
 }

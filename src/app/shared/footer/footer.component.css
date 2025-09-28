@@ -5,6 +5,11 @@ footer {
   align-items: center;
   padding: 70px 0;
   color: #fff;
+
+  @media (max-width: 1285px) {
+    flex-direction: column;
+    gap: 40px;
+  }
 }
 
 .spacer {
@@ -12,6 +17,10 @@ footer {
   height: 231px;
   background-color: #fff;
   margin: 0 40px;
+
+  @media (max-width: 1285px) {
+    display: none;
+  }
 }
 
 footer ul {

@@ -17,6 +17,7 @@ export class HeaderComponent {
           for (let element of Array.from(document.getElementsByClassName('header__dinamico'))) {
             element.classList.add('hidden');
           }
+          document.getElementById('headerNav')?.classList.remove('menu-open');
         }
         else {
           for (let element of Array.from(document.getElementsByClassName('header__dinamico'))) {

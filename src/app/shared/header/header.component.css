@@ -53,10 +53,6 @@ header {
   }
 }
 
-.menu-open {
-  display: block;
-}
-
 .header__side__content {
   display: flex;
   align-items: center;
@@ -187,4 +183,8 @@ header {
 
 .hidden {
   display: none !important;
+}
+
+.menu-open {
+  display: block !important;
 }

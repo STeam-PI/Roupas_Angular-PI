@@ -1,0 +1,94 @@
+/* =+= Reset =+= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =+= Container =+= */
+.form-container {
+    max-width: 800px;
+    margin: 4.5rem auto;
+    padding: 2.5rem;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* =+= Título =+= */
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* =+= Estado Inicial =+= */
+.estado-inicial {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Blocos do estado inicial */
+.campo-info {
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fafafa;
+    text-align: left;
+}
+
+.campo-titulo {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.campo-subtexto {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+/* =+= Inputs =+= */
+input {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* =+= Botões =+= */
+/* Botões padrão */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #D5AD3B;
+    color: #000;
+    transition: background 0.3s;
+}
+
+/* Hover botões habilitados */
+button:hover:enabled {
+    background-color: #b68c1b;
+}
+
+/* Estado desabilitado */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* =+= Responsividade =+= */
+@media (max-width: 700px) {
+    .estado-inicial {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,12 +1,10 @@
 <main id="content">
-  <!-- Banner principal -->
   <section id="banner">
     <img class="banner-content" src="../../../assets/images/camisa_xpto.png" alt="Coleção Balacobaco">
-    <div class="banner-cover banner-content">
-    </div>
+    <div class="banner-cover banner-content"></div>
     <p class="text">PRIMEIRA COMPRA COM 10% DE DESCONTO<br><span>CUPOM: APP10</span></p>
   </section>
-  <!-- Produtos em promo -->
+
   <section class="section-lancamentos" id="lancamentos">
     <h2>ÚLTIMOS LANÇAMENTOS →</h2>
     <div class="grid-lancamentos">
@@ -16,5 +14,36 @@
       <app-card-roupa></app-card-roupa>
       <app-card-roupa></app-card-roupa>
     </div>
+  </section>
+
+  <section class="section-colecao" id="ultima-colecao">
+    <img src="../../../assets/images/camisa_xpto.png" alt="Última Coleção">
+    <div class="colecao-overlay">
+      <h2>CONHEÇA A ÚLTIMA COLEÇÃO</h2>
+      <a href="#" target="_blank" class="btn-colecao">Conferir →</a>
+    </div>
+  </section>
+
+
+
+  <section class="section-lancamentos" id="destaques">
+    <h2>PRODUTOS EM DESTAQUE →</h2>
+    <div class="grid-lancamentos">
+      <app-card-roupa></app-card-roupa>
+      <app-card-roupa></app-card-roupa>
+      <app-card-roupa></app-card-roupa>
+      <app-card-roupa></app-card-roupa>
+      <app-card-roupa></app-card-roupa>
+    </div>
+  </section>
+
+  <!-- newsletter (título e texto dentro da section) -->
+  <section id="newsletter">
+    <h2>RECEBA NOSSAS OFERTAS</h2>
+    <p>Assine nossa newsletter e fique por dentro das novidades e promoções.</p>
+    <form>
+      <input type="email" placeholder="Digite seu e-mail" required>
+      <button type="submit">Cadastrar</button>
+    </form>
   </section>
 </main>

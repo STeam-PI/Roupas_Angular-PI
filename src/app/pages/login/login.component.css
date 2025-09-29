@@ -1,61 +1,65 @@
 .form-container {
-    max-width: 543px;
-    margin: 50px auto;
-    padding: 30px;
-    background: #fff;
-    border-radius: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    text-align: center;
+  max-width: 543px;
+  margin: 5rem auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+
+  @media (max-width: 600px) {
+    margin: 5rem 1rem;
+  }
 }
 
 .form-container h2 {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 25px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 25px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group select {
-    width: 34%;
-    padding: 12px 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border-bottom: 2px solid #555;
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.3s;
+  width: 34%;
+  padding: 12px 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-bottom: 2px solid #555;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 12px 10px;
-    border: none;
-    border-bottom: 2px solid #605f5f;
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.3s;
-    text-align: center;
+  width: 100%;
+  padding: 12px 10px;
+  border: none;
+  border-bottom: 2px solid #605f5f;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+  text-align: center;
 }
 
 .form-group input:focus {
-    border-color: #D5AD3B;
+  border-color: #D5AD3B;
 }
 
 button {
-    width: 100%;
-    padding: 14px;
-    background: #D5AD3B;
-    color: #000000;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background 0.3s;
+  width: 100%;
+  padding: 14px;
+  background: #D5AD3B;
+  color: #000000;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 button:hover {
-    background: #b68c1b;
+  background: #b68c1b;
 }

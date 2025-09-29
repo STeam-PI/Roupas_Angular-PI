@@ -60,35 +60,163 @@ section#banner .text span {
   justify-items: center;
   margin-top: 30px;
   padding: 10px 50px;
+}
 
-  @media (max-width: 1750px) {
+@media (max-width: 1750px) {
+  .section-lancamentos .grid-lancamentos {
     grid-template-columns: repeat(4, 1fr);
   }
+}
 
-  @media (max-width: 1400px) {
+@media (max-width: 1400px) {
+  .section-lancamentos .grid-lancamentos {
     grid-template-columns: repeat(3, 1fr);
   }
+}
 
-  @media (max-width: 1060px) {
+@media (max-width: 1060px) {
+  .section-lancamentos .grid-lancamentos {
     gap: 30px;
     padding: 10px 20px;
   }
+}
 
-  @media (max-width: 980px) {
+@media (max-width: 980px) {
+  .section-lancamentos .grid-lancamentos {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     padding: 10px 10%;
   }
+}
 
-  @media (max-width: 820px) {
+@media (max-width: 820px) {
+  .section-lancamentos .grid-lancamentos {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     padding: 10px 10px;
   }
+}
 
-  @media (max-width: 650px) {
+@media (max-width: 650px) {
+  .section-lancamentos .grid-lancamentos {
     grid-template-columns: repeat(1, 1fr);
     gap: 40px;
-    padding: 10px auto;
+    padding: 10px;
   }
 }
+
+
+#ultima-colecao {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 50px;
+}
+
+#ultima-colecao img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#ultima-colecao .colecao-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 12px #00000095;
+}
+
+#ultima-colecao h2 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#ultima-colecao .btn-colecao {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#ultima-colecao .btn-colecao:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+#ultima-colecao .btn-colecao:active {
+  transform: scale(0.95);
+}
+
+#newsletter {
+  background: #f5f5f5;
+  padding: 60px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#newsletter h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  text-shadow: 0px 2px 15px #00000020;
+}
+
+#newsletter p {
+  font-size: 16px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+#newsletter form {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+#newsletter input[type="email"] {
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 300px;
+  max-width: 90%;
+}
+
+#newsletter button {
+  padding: 12px 25px;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#newsletter button:hover {
+  background: #333;
+}
+
+@media (max-width: 820px) {
+  #ultima-colecao img {
+    height: 320px;
+  }
+
+  #ultima-colecao h2 {
+    font-size: 28px;
+  }
+
+  #ultima-colecao p {
+    font-size: 16px;
+  }
+}
+

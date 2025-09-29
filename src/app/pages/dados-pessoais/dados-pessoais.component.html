@@ -1,0 +1,94 @@
+<div class="form-container">
+    <h2>{{ titulo }}</h2>
+
+    <!-- Estado inicial -->
+    <div *ngIf="estado === 'inicial'" class="estado-inicial">
+        <div class="campo-info">
+            <p class="campo-titulo">Adicione seu email</p>
+            <p class="campo-subtexto">Você vai receber informações sobre sua conta.</p>
+            <button [ngStyle]="{'background-color': email ? '#4a4547' : '#D5AD3B'}"
+                (click)="transformarContainer('email')">
+                {{ email ? 'Editar' : 'Adicionar' }}
+            </button>
+        </div>
+
+        <div class="campo-info">
+            <p class="campo-titulo">Adicione seu nome</p>
+            <p class="campo-subtexto">Precisamos do seu nome completo para personalizar sua conta.</p>
+            <button [ngStyle]="{'background-color': (nome && sobrenome) ? '#4a4547' : '#D5AD3B'}"
+                (click)="transformarContainer('nome')">
+                {{ (nome && sobrenome) ? 'Editar' : 'Adicionar' }}
+            </button>
+        </div>
+
+        <div class="campo-info">
+            <p class="campo-titulo">Adicione seu CPF</p>
+            <p class="campo-subtexto">Usado para validação e emissão de notas fiscais.</p>
+            <button [ngStyle]="{'background-color': cpf ? '#4a4547' : '#D5AD3B'}" (click)="transformarContainer('cpf')">
+                {{ cpf ? 'Editar' : 'Adicionar' }}
+            </button>
+        </div>
+
+        <div class="campo-info">
+            <p class="campo-titulo">Adicione sua data de nascimento</p>
+            <p class="campo-subtexto">Importante para confirmar sua identidade.</p> <br>
+            <button [ngStyle]="{'background-color': dataNascimento ? '#4a4547' : '#D5AD3B'}"
+                (click)="transformarContainer('data')">
+                {{ dataNascimento ? 'Editar' : 'Adicionar' }}
+            </button>
+        </div>
+
+        <div class="campo-info">
+            <p class="campo-titulo">Adicione seu CEP</p>
+            <p class="campo-subtexto">Usado para calcular fretes e localizar sua região.</p>
+            <button [ngStyle]="{'background-color': cep ? '#4a4547' : '#D5AD3B'}" (click)="transformarContainer('cep')">
+                {{ cep ? 'Editar' : 'Adicionar' }}
+            </button>
+        </div>
+
+        <div class="campo-info">
+            <p class="campo-titulo">Crie uma senha</p>
+            <p class="campo-subtexto">A senha será usada para proteger sua conta.</p> <br>
+            <button
+                [ngStyle]="{'background-color': (senha && confirmarSenha && senha === confirmarSenha) ? '#4a4547' : '#D5AD3B'}"
+                (click)="transformarContainer('senha')">
+                {{ (senha && confirmarSenha && senha === confirmarSenha) ? 'Editar' : 'Adicionar' }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Estados de edição -->
+    <div *ngIf="estado === 'email'" class="estado-email">
+        <input type="email" placeholder="Digite seu email" [(ngModel)]="email" (input)="validarEmail()" />
+        <button [disabled]="!emailValido" (click)="voltarInicial()">Continuar</button>
+    </div>
+
+    <div *ngIf="estado === 'nome'" class="estado-nome">
+        <input type="text" placeholder="Nome" [(ngModel)]="nome" />
+        <input type="text" placeholder="Sobrenome" [(ngModel)]="sobrenome" />
+        <button [disabled]="!nome || !sobrenome" (click)="voltarInicial()">Continuar</button>
+    </div>
+
+    <div *ngIf="estado === 'cpf'" class="estado-cpf">
+        <input type="text" placeholder="000.000.000-00" maxlength="14" [(ngModel)]="cpf" />
+        <button [disabled]="!cpf" (click)="voltarInicial()">Continuar</button>
+    </div>
+
+    <div *ngIf="estado === 'data'" class="estado-data">
+        <input type="date" [(ngModel)]="dataNascimento" />
+        <button [disabled]="!dataNascimento" (click)="voltarInicial()">Continuar</button>
+    </div>
+
+    <div *ngIf="estado === 'cep'" class="estado-cep">
+        <input type="text" placeholder="00000-000" maxlength="9" [(ngModel)]="cep" />
+        <button [disabled]="!cep" (click)="voltarInicial()">Continuar</button>
+    </div>
+
+    <div *ngIf="estado === 'senha'" class="estado-senha">
+        <input type="password" placeholder="Senha" [(ngModel)]="senha" />
+        <input type="password" placeholder="Confirmar Senha" [(ngModel)]="confirmarSenha" />
+        <button [disabled]="!senha || !confirmarSenha || senha !== confirmarSenha" (click)="finalizarCadastro()">
+            Continuar
+        </button>
+    </div>
+</div>

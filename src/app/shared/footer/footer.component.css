@@ -3,13 +3,8 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 70px 0;
+  padding: 60px 0 50px 0;
   color: #fff;
-
-  @media (max-width: 1285px) {
-    flex-direction: column;
-    gap: 40px;
-  }
 }
 
 .spacer {
@@ -17,10 +12,6 @@ footer {
   height: 231px;
   background-color: #fff;
   margin: 0 40px;
-
-  @media (max-width: 1285px) {
-    display: none;
-  }
 }
 
 footer ul {
@@ -53,4 +44,74 @@ footer ul li {
   height: 120px;
   margin-right: 10px;
   object-fit: cover;
+}
+
+.footer__img {
+  width: 400px;
+}
+
+.footer__img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.contato__img {
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 1600px) {
+  footer {
+    padding: 50px 0 20px 0;
+  }
+
+  .footer__img {
+    width: 300px;
+  }
+
+  footer ul li {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1185px) {
+  footer {
+    padding: 50px 0 10px 0;
+  }
+
+  .footer__img {
+    width: 200px;
+  }
+
+  footer ul li {
+    font-size: 16px;
+  }
+
+  .formas-pagamento img {
+    height: 90px;
+  }
+}
+
+@media (max-width: 900px) {
+  footer {
+    flex-direction: column;
+    gap: 40px;
+    padding: 50px 0 0 0;
+  }
+
+  .spacer {
+    display: none;
+  }
+
+  .footer__img {
+    width: 250px;
+  }
+
+  footer ul li {
+    font-size: 24px;
+  }
+
+  .formas-pagamento img {
+    height: 105px;
+  }
 }

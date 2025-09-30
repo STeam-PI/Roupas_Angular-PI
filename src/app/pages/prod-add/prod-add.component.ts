@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prod-add',
@@ -7,6 +8,8 @@ import { Component, AfterViewInit } from '@angular/core';
   styleUrl: './prod-add.component.css'
 })
 export class ProdAddComponent implements AfterViewInit {
+
+  constructor(private router: Router) { }
 
   ngAfterViewInit(): void {
     const inputImg = document.getElementById("item-image") as HTMLInputElement;
@@ -18,7 +21,7 @@ export class ProdAddComponent implements AfterViewInit {
         const reader = new FileReader();
         reader.onload = e => {
           const imageUrl = e.target?.result as string;
-          
+
           uploadArea.style.backgroundImage = `url('${imageUrl}')`;
           uploadArea.classList.add("has-image");
         };
@@ -32,5 +35,9 @@ export class ProdAddComponent implements AfterViewInit {
         label.classList.toggle("active");
       });
     });
+  }
+
+  redireciona() {
+    this.router.navigate(['roupas/listagem']);
   }
 }

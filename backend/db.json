@@ -1,0 +1,12 @@
+{
+  "produtos": [
+    {
+      "id": "f898",
+      "nome": "Corinthians x Approve",
+      "cor": "#844343",
+      "tamanho": "GG",
+      "marca": "Nike",
+      "valor": 20
+    }
+  ]
+}

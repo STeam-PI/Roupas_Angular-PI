@@ -8,7 +8,8 @@ import { DadosPessoaisComponent } from './pages/dados-pessoais/dados-pessoais.co
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'roupas/cadastro', component: ProdAddComponent },
+  { path: 'roupas/cadastro/:id', component: ProdAddComponent }, // Rota para edição
+  { path: 'roupas/cadastro', component: ProdAddComponent },      // Rota para cadastro (sem ID)
   { path: 'roupas/listagem', component: ProdCadastroComponent },
   { path: 'usuarios/cadastro', component: DadosPessoaisComponent},
 ];

@@ -1,0 +1,36 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Produtos } from '../types/types';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProdutosService {
+
+  // CORREÇÃO: Mudar de 'https' para 'http' para evitar ERR_SSL_PROTOCOL_ERROR
+  private readonly API = 'http://localhost:3000/produtos'; 
+  
+  constructor (private http: HttpClient) { }
+
+  listar(): Observable<Produtos[]>{ 
+    return this.http.get<Produtos[]>(this.API);
+  }
+
+  buscarPorId(id: String | number): Observable<Produtos | undefined> {
+    return this.http.get<Produtos>(this.API+`/${id}`);
+  }
+
+  inserir(produto: Produtos): Observable<Produtos> {
+    return this.http.post<Produtos>(this.API, produto);
+  }
+
+  atualizar(produto: Produtos): Observable<Produtos> {
+    const url = `${this.API}/${produto.id}`;
+    return this.http.put<Produtos>(url, produto);
+  }
+
+  excluir(id: String | number): Observable<void> {
+    return this.http.delete<void>(this.API+`/${id}`);
+  }
+}

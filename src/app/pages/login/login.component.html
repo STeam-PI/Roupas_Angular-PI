@@ -11,7 +11,7 @@
     <p>Não possui conta ainda? <a href="usuarios/cadastro">Cadastre-se!</a></p>
     <p><a href="#">Esqueci a minha senha</a></p>
 
-    <button type="submit" (disable)="(disabledButton)" (click)="onClickLogin()">
+    <button type="submit" [disabled]="disabledButton" (click)="onClickLogin()">
       Entrar
     </button>
   </form>

@@ -1,0 +1,18 @@
+<div class="category-container">
+  
+  <h1 class="category-title">{{ categoriaTitulo | titlecase }}</h1>
+
+  <ng-container *ngIf="produtos$ | async as produtos">
+    
+    <div *ngIf="produtos.length > 0; else semProdutos" class="product-grid">
+      
+      <app-product-card *ngFor="let p of produtos" [produto]="p"></app-product-card>
+
+    </div>
+    
+    <ng-template #semProdutos>
+      <p class="fallback-message">Nenhum produto encontrado nesta categoria.</p>
+    </ng-template>
+
+  </ng-container>
+</div>

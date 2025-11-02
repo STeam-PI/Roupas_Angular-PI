@@ -5,4 +5,6 @@ export interface Produtos {
   tamanho: string;
   marca: string;
   valor: number;
+  imagemUrl: string;
+  categoria: string;
 }

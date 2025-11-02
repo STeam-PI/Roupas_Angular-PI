@@ -1,12 +1,84 @@
 {
   "produtos": [
     {
-      "id": "f898",
-      "nome": "Corinthians x Approve",
-      "cor": "#844343",
-      "tamanho": "GG",
-      "marca": "Nike",
-      "valor": 20
+      "id": 1,
+      "nome": "Camiseta Oversized DIY Classic",
+      "cor": "Preto",
+      "tamanho": "G",
+      "marca": "DIY",
+      "valor": 129.9,
+      "categoria": "camisetas",
+      "imagemUrl": "assets/images/over.jpg"
+    },
+    {
+      "id": 2,
+      "nome": "Camiseta XPTO Edition",
+      "cor": "Branco",
+      "tamanho": "M",
+      "marca": "DIY",
+      "valor": 149.9,
+      "categoria": "camisetas",
+      "imagemUrl": "assets/images/camisa_xpto.png"
+    },
+    {
+      "id": 3,
+      "nome": "Jaqueta Moletom Basic",
+      "cor": "Cinza",
+      "tamanho": "G",
+      "marca": "DIY",
+      "valor": 249.9,
+      "categoria": "jaquetas",
+      "imagemUrl": "assets/images/moletom.jpg"
+    },
+    {
+      "id": 4,
+      "nome": "Calça Jeans Reta Coleção Apolo",
+      "cor": "Azul Claro",
+      "tamanho": "42",
+      "marca": "DIY",
+      "valor": 229.9,
+      "categoria": "jeans",
+      "imagemUrl": "assets/images/ColecaoApolo.jpg"
+    },
+    {
+      "id": 5,
+      "nome": "Calça Cargo Balacobaco",
+      "cor": "Verde Musgo",
+      "tamanho": "40",
+      "marca": "DIY",
+      "valor": 279.9,
+      "categoria": "calcas",
+      "imagemUrl": "assets/images/balacobacojpg.jpg"
+    },
+    {
+      "id": 6,
+      "nome": "Tênis Básico DIY",
+      "cor": "Branco",
+      "tamanho": "41",
+      "marca": "DIY",
+      "valor": 199.9,
+      "categoria": "calcados",
+      "imagemUrl": "assets/images/calcados.jpg"
+    },
+    {
+      "id": 7,
+      "nome": "Jaqueta Coleção Exclusiva",
+      "cor": "Preto",
+      "tamanho": "M",
+      "marca": "DIY",
+      "valor": 399.9,
+      "categoria": "jaquetas",
+      "imagemUrl": "assets/images/colecaoExclusive.jpg"
+    },
+    {
+      "id": 8,
+      "nome": "Calça Jeans 2025",
+      "cor": "Azul Escuro",
+      "tamanho": "38",
+      "marca": "DIY",
+      "valor": 239.9,
+      "categoria": "calcas",
+      "imagemUrl": "assets/images/colecao2025jpg.jpg"
     }
   ]
 }

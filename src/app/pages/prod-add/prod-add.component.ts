@@ -25,6 +25,8 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     tamanho: '', // Armazena o tamanho selecionado (P, M, G ou 36, 37, 38...)
     marca: '',
     valor: 0,
+    categoria: '',
+    imagemUrl: ''
   };
   
   // Listas Dinâmicas (Simuladas - idealmente viriam de um service)

@@ -1,93 +1,43 @@
-nav {
-  padding: 0.8rem 0;
-  /* tamanho da área do nav baseado no tamanho da fonte */
-  /* linha para separar da heade */
-  display: flex;
-  justify-content: center;
+.main-nav {
   width: 100%;
-
-  @media (max-width: 700px) {
-    justify-content: end;
-    padding-right: 24px;
-  }
 }
 
-.item-5 {
-  @media (max-width: 1000px) {
-    display: none;
-  }
-
-  @media (max-width: 700px) {
-    display: block;
-  }
-}
-
-.item-4 {
-  @media (max-width: 800px) {
-    display: none;
-  }
-
-  @media (max-width: 700px) {
-    display: block;
-  }
-}
-
-.nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.main-nav ul {
+  list-style: none; 
   display: flex;
-  /* alinhar os itens um ao lado do outro */
-  gap: 3rem;
-
-  /* espaço entre as opçoes do menu */
-  @media (max-width: 700px) {
-    flex-direction: column;
-    align-items: end;
-  }
+  justify-content: center; 
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  gap: 2rem;
 }
 
-.nav__link {
-  color: #ffffff;
-  text-decoration: none;
-  font-family: 'Alexandria', sans-serif;
-  font-size: 25px;
+.main-nav a {
+  font-size: 0.875rem; 
+  font-weight: 500;
   text-transform: uppercase;
-  padding: 0.5rem 0;
+  color: #E0E0E0; 
+  text-decoration: none;
+  padding: 0.75rem 0;
   position: relative;
-  /* para a linha embaixo da escrita */
-  transition: color 0.3s ease;
+  transition: color 0.2s ease-in-out;
 }
 
-.nav__link:hover {
-  /* efeito para quando passar o mouse em cima */
-  color: #D5AD3B;
-  /* muda a cor para o amarelo base do projeto */
+.main-nav a:hover {
+  color: #ffffff;
 }
 
-.nav__item--active .nav__link {
-  /* efeito para deixar o item selecionado amarelo */
-  color: #D5AD3B;
-  font-weight: 600;
-  /* O item ativo já fica com a cor amarela */
+.main-nav a.active-link {
+  color: #ffffff;
+  font-weight: 700;
 }
 
-.nav__link::after {
-  /* efeito para aparecer linha embaixo do item ao passar o mouse */
+.main-nav a.active-link::after {
   content: '';
   position: absolute;
-  bottom: 4px;
+  bottom: 0.5rem;
   left: 0;
   width: 100%;
-  height: 3px;
-  background-color: #D5AD3B;
-  transform: scaleX(0);
-  /* tamanho da linha começa com 0 */
-  transition: transform 0.3s ease;
-  /* animação */
-}
-
-.nav__link:hover::after {
-  transform: scaleX(1);
-  /* deixa a linha do tamanho do item */
+  height: 2px;
+  background-color: #ffffff;
 }

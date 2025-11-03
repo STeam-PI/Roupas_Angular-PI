@@ -9,10 +9,10 @@ import { Marca } from '../types/types';
 })
 export class ProdutosService {
 
-  // Altera para o endpoint base e usa endpoints específicos para produtos, cores e marcas
+  // Altera para o endpoint base e usa endpoints específicos para produtos e marcas
   private readonly API = 'http://localhost:3000'; 
   private readonly PRODUTOS_API = `${this.API}/produtos`;
-  private readonly MARCAS_API = `${this.API}/marcas`; // Novo endpoint assumido para marcas
+  private readonly MARCAS_API = `${this.API}/marcas`; 
   
   constructor (private http: HttpClient) { }
 

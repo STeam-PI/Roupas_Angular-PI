@@ -1,90 +1,88 @@
 <form (ngSubmit)="salvar()">
-  
-<div class="textTitles">
-  <section class="title">
-    <h1>{{ produto.id ? 'Edição' : 'Cadastro' }} de Produtos</h1>
-  </section>
-</div>
 
-<div class="item-card-wrapper">
-  <div class="item-card">
-    <div class="item-img">
-      <label for="item-image" class="upload-area" id="upload-area">
-        <input type="file" id="item-image" accept="image/*">
-        <span class="upload-text">Clique para enviar imagem</span>
-      </label>
-    </div>
+  <div class="textTitles">
+    <section class="title">
+      <h1>{{ produto.id ? 'Edição' : 'Cadastro' }} de Produtos</h1>
+    </section>
+  </div>
 
-    <div class="item-details">
-      <input type="text" class="item-name" placeholder="Nome do Produto" [(ngModel)]="produto.nome" name="nome" required>
-      <p class="item-id" *ngIf="produto.id">ID: #{{ produto.id }}</p>
-      <hr>
-
-      <div class="detail-block">
-        <p class="label">Valor:</p>
-        R$ <input type="number" class="item-value" placeholder="0.00" [(ngModel)]="produto.valor" name="valor" required>
+  <div class="item-card-wrapper">
+    <div class="item-card">
+      <div class="item-img">
+        <label for="item-image" class="upload-area" id="upload-area">
+          <input type="file" id="item-image" accept="image/*">
+          <span class="upload-text">Clique para enviar imagem</span>
+        </label>
       </div>
-      <hr>
 
-      <div class="detail-block">
-        <p class="label">Tipo de Tamanho:</p>
-        
-        <div style="margin-bottom: 10px; display: flex; gap: 10px;">
-          <button type="button" (click)="alternarTipoTamanho('roupa')" 
-                  [class.active]="tipoTamanhoSelecionado === 'roupa'">Roupa</button>
-          <button type="button" (click)="alternarTipoTamanho('calcado')" 
-                  [class.active]="tipoTamanhoSelecionado === 'calcado'">Calçado</button>
+      <div class="item-details">
+        <input type="text" class="item-name" placeholder="Nome do Produto" [(ngModel)]="produto.nome" name="nome"
+          required>
+        <p class="item-id" *ngIf="produto.id">ID: #{{ produto.id }}</p>
+        <hr>
+
+        <div class="detail-block">
+          <p class="label">Valor:</p>
+          R$
+          <input type="text" class="item-value" placeholder="0,00" [(ngModel)]="valorFormatado"
+            (input)="aplicarMascaraValor()" name="valorFormatado" inputmode="numeric" required>
         </div>
+        <hr>
 
-        <p class="label">Tamanhos:</p>
-        <div class="item-sizes">
-          <label *ngFor="let tamanho of tamanhosFiltrados" 
-                 [class.active]="produto.tamanho === tamanho.valor">
-            <input type="radio" name="tamanho" [(ngModel)]="produto.tamanho" [value]="tamanho.valor" style="display: none;" required>
-            {{ tamanho.label }}
-          </label>
+        <div class="detail-block">
+          <p class="label">Tamanhos Disponíveis:</p>
+
+          <div class="item-sizes">
+            <label *ngFor="let opcao of tamanhosOpcoes" [class.active]="produto.tamanho.includes(opcao.valor)"
+              (click)="toggleTamanho(opcao.valor)">
+              {{ opcao.label }}
+            </label>
+          </div>
         </div>
-      </div>
-      <hr>
+        <hr>
 
-      <div class="detail-block">
-        <p class="label">Cores:</p>
-        <div class="item-colors">
-          <label class="color-circle" 
-                 *ngFor="let cor of coresCadastradas" 
-                 [style.background]="cor" 
-                 [class.active]="produto.cor === cor"
-                 [style.border]="cor === '#FFFFFF' ? '1px solid #aaa' : 'none'">
-            <input type="radio" name="cor" [(ngModel)]="produto.cor" [value]="cor" style="display: none;">
-          </label>
+        <div class="detail-block">
+          <p class="label">Cores:</p>
+          <div class="item-colors">
+            <label class="color-circle" 
+                   *ngFor="let cor of coresCadastradas" 
+                   [style.background]="cor"
+                   [class.active]="produto.cor.includes(cor)" 
+                   [style.border]="cor === '#FFFFFF' ? '1px solid #aaa' : 'none'">
 
-          <label class="color-circle add-color">
-            +
-            <input type="color" class="color-input-hidden" (change)="adicionarNovaCor($event)">
-          </label>
+              <div class="color-overlay">
+                <span class="delete-color" (click)="removerCor(cor); $event.stopPropagation()">🗑️</span>
+                <span class="toggle-area" (click)="toggleCor(cor)"></span>
+              </div>
+            </label>
+
+            <label class="color-circle add-color">
+              +
+              <input type="color" class="color-input-hidden" (change)="adicionarNovaCor($event)">
+            </label>
+          </div>
         </div>
-      </div>
-      <hr>
+        <hr>
 
-      <div class="detail-block">
-        <p class="label">Marca:</p>
-        <div style="display: flex; gap: 10px; align-items: center;">
+        <div class="detail-block">
+          <p class="label">Marca:</p>
+          <div style="display: flex; gap: 10px; align-items: center;">
             <select class="brand-select" [(ngModel)]="produto.marca" name="marca" required>
               <option value="" disabled>Selecione...</option>
               <option *ngFor="let marca of marcasDisponiveis" [value]="marca">{{ marca }}</option>
             </select>
-            
-            <button type="button" class="insert-brand" (click)="cadastrarNovaMarca()">+ Marca</button>
-        </div>
-      </div>
-      <hr>
 
+            <button type="button" class="insert-brand" (click)="cadastrarNovaMarca()">+ Marca</button>
+          </div>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+
+    <div class="btn-below">
+      <button class="back" type="button" (click)="redireciona()">Voltar</button>
+      <button class="save" type="submit">{{ produto.id ? 'Salvar Edição' : 'Cadastrar' }}</button>
     </div>
   </div>
-
-  <div class="btn-below">
-    <button class="back" type="button" (click)="redireciona()">Voltar</button>
-    <button class="save" type="submit">{{ produto.id ? 'Salvar Edição' : 'Cadastrar' }}</button>
-  </div>
-</div>
 </form>

@@ -2,35 +2,46 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Produtos } from '../types/types';
+import { Marca } from '../types/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutosService {
 
-  // CORREÇÃO: Mudar de 'https' para 'http' para evitar ERR_SSL_PROTOCOL_ERROR
-  private readonly API = 'http://localhost:3000/produtos'; 
+  // Altera para o endpoint base e usa endpoints específicos para produtos, cores e marcas
+  private readonly API = 'http://localhost:3000'; 
+  private readonly PRODUTOS_API = `${this.API}/produtos`;
+  private readonly MARCAS_API = `${this.API}/marcas`; // Novo endpoint assumido para marcas
   
   constructor (private http: HttpClient) { }
 
   listar(): Observable<Produtos[]>{ 
-    return this.http.get<Produtos[]>(this.API);
+    return this.http.get<Produtos[]>(this.PRODUTOS_API);
+  }
+
+  listarMarcas(): Observable<Marca[]>{ 
+    return this.http.get<Marca[]>(this.MARCAS_API);
+  }
+
+  inserirMarca(marca: Marca): Observable<Marca> {
+    return this.http.post<Marca>(this.MARCAS_API, marca);
   }
 
   buscarPorId(id: String | number): Observable<Produtos | undefined> {
-    return this.http.get<Produtos>(this.API+`/${id}`);
+    return this.http.get<Produtos>(this.PRODUTOS_API+`/${id}`);
   }
 
   inserir(produto: Produtos): Observable<Produtos> {
-    return this.http.post<Produtos>(this.API, produto);
+    return this.http.post<Produtos>(this.PRODUTOS_API, produto);
   }
 
   atualizar(produto: Produtos): Observable<Produtos> {
-    const url = `${this.API}/${produto.id}`;
+    const url = `${this.PRODUTOS_API}/${produto.id}`;
     return this.http.put<Produtos>(url, produto);
   }
 
   excluir(id: String | number): Observable<void> {
-    return this.http.delete<void>(this.API+`/${id}`);
+    return this.http.delete<void>(this.PRODUTOS_API+`/${id}`);
   }
 }

@@ -10,9 +10,6 @@
 .title {
   width: 85%;
   margin: 0 auto;
-}
-
-.title {
   font-size: 20px;
   margin-top: 0;
   margin-bottom: 12px;
@@ -86,7 +83,6 @@ h1 {
   display: none;
 }
 
-
 /* Detalhes */
 .item-details {
   flex: 1;
@@ -104,15 +100,19 @@ input[type="number"] {
 }
 
 .item-name {
-  margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  width: 82%;
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 80%;
+  box-sizing: border-box;
 }
 
 .item-id {
-  margin: 5px 0 20px;
-  color: #555;
+  margin: 2px 0 3px;
+  color: #777;
 }
 
 /* Blocos de detalhes */
@@ -130,7 +130,7 @@ input[type="number"] {
   color: #111010;
   font-weight: bold;
   font-size: 1.1rem;
-  width: 90px;
+  width: 78px;
 }
 
 /* HR customizado */
@@ -139,6 +139,28 @@ input[type="number"] {
   border-top: 1px solid #ddd;
   margin: 0;
 }
+
+.brand-select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.insert-brand {
+  padding: 8px 12px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.insert-brand:hover {
+  background: #2980b9;
+}
+
 
 /* Cores */
 .item-colors {
@@ -249,21 +271,82 @@ button {
   font-weight: bold;
 }
 
-.edit {
+.save {
   background: #f39c12;
   color: #fff;
   margin-right: 4px;
 }
 
-.edit:hover {
+.save:hover {
   background-color: #e67e22;
 }
 
-.delete {
+.back {
   background: #e74c3c;
   color: #fff;
 }
 
-.delete:hover {
+.back:hover {
   background-color: #c0392b;
+}
+
+/* Cores */
+.item-colors {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.color-circle {
+  /* ... existing styles ... */
+  position: relative; /* Necessário para posicionar o overlay */
+  overflow: hidden; 
+}
+
+.color-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-color {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; /* Tamanho do emoji lixeira */
+    opacity: 0;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+    color: white;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.toggle-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 5; /* Abaixo da lixeira */
+}
+
+/* ** REQUISITO: Efeito hover para mostrar a lixeira ** */
+.color-circle:hover .delete-color {
+    opacity: 1;
+}
+
+.color-circle.active {
+    box-shadow: 0 0 0 1.5px #333; /* Adiciona um destaque visual para a cor selecionada */
 }

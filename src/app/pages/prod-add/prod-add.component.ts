@@ -5,15 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { ProdutosService } from '../../core/services/produtos.service';
 import { Produtos, Marca } from '../../core/types/types';
 
-// Tipo auxiliar para permitir que o 'id' seja opcional ou 0
 type ProdutoParaFormulario = Omit<Produtos, 'id' | 'tamanho' | 'cor'> & {
   id?: String | number;
-  tamanho: string[]; // Array de tamanhos selecionados
-  cor: string[];     // Alterado para array de strings para seleção múltipla de cores
+  tamanho: string[]; 
+  cor: string[];   
   imagem: string;
 };
 
-// Tipagem simplificada de Tamanho
 type TamanhoOpcao = { valor: string, label: string };
 
 @Component({
@@ -27,7 +25,7 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
   produto: ProdutoParaFormulario = {
     id: 0,
     nome: '',
-    cor: [], // Inicializado como array vazio
+    cor: [], 
     tamanho: [],
     marca: '',
     valor: 0,
@@ -35,7 +33,7 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
   };
 
   marcasDisponiveis: string[] = [];
-  coresCadastradas: string[] = []; // Inicia vazio. Cores serão adicionadas pelo usuário.
+  coresCadastradas: string[] = []; 
 
   tamanhosOpcoes: TamanhoOpcao[] = [
     { valor: 'P', label: 'P' },
@@ -63,16 +61,14 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
       if (idParam) {
         this.service.buscarPorId(idParam).subscribe(prod => {
           if (prod) {
-            // Lógica para carregar tamanhos e cores corretamente
+            
             this.produto = {
               ...prod,
               tamanho: Array.isArray(prod.tamanho) ? prod.tamanho : (prod.tamanho ? (prod.tamanho as string).split(',') : []),
-              // Converte a string de cores salva ('#000000,#FFFFFF') em array
               cor: Array.isArray(prod.cor) ? prod.cor : (prod.cor ? (prod.cor as string).split(',') : []),
               imagem: (prod as any).imagem || ''
             };
 
-            // Adiciona as cores do produto à lista de cores disponíveis (se não existirem)
             this.produto.cor.forEach(c => {
               if (c && !this.coresCadastradas.includes(c)) {
                 this.coresCadastradas.push(c);
@@ -81,7 +77,6 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
 
             this.formatarValor(this.produto.valor);
 
-            // ** REQUISITO: Chamar a atualização do preview da imagem aqui **
             this.uploadArea = document.getElementById("upload-area") as HTMLElement;
             this.updateImagePreview(this.produto.imagem);
           }
@@ -92,7 +87,6 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // ** REQUISITO: Método para centralizar a lógica de preview da imagem **
   updateImagePreview(base64Image: string) {
     if (!this.uploadArea) return;
 
@@ -109,7 +103,6 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     this.inputImg = document.getElementById("item-image") as HTMLInputElement;
     this.uploadArea = document.getElementById("upload-area") as HTMLElement;
 
-    // Lógica de Upload de Imagem e Conversão para Base64
     this.inputImg?.addEventListener("change", () => {
       const file = this.inputImg?.files?.[0];
       if (file) {
@@ -125,50 +118,41 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Lógica para toggle de seleção de cores (múltipla seleção)
   toggleCor(corValor: string) {
     const index = this.produto.cor.indexOf(corValor);
     if (index > -1) {
-      // Remove da seleção do produto
       this.produto.cor.splice(index, 1);
     } else {
-      // Adiciona à seleção do produto
       this.produto.cor.push(corValor);
     }
   }
 
-  // ** REQUISITO: Lógica de remoção de cor **
   removerCor(corValor: string) {
     if (!confirm(`Tem certeza que deseja remover a cor ${corValor} da lista de cores disponíveis?`)) {
       return;
     }
 
-    // 1. Remove da lista de cores disponíveis (coresCadastradas)
     const cadastradasIndex = this.coresCadastradas.indexOf(corValor);
     if (cadastradasIndex > -1) {
       this.coresCadastradas.splice(cadastradasIndex, 1);
     }
 
-    // 2. Remove da seleção atual do produto (produto.cor)
     const produtoIndex = this.produto.cor.indexOf(corValor);
     if (produtoIndex > -1) {
       this.produto.cor.splice(produtoIndex, 1);
     }
   }
 
-  // Requisito: Adicionar nova cor
   adicionarNovaCor(event: Event) {
     const input = event.target as HTMLInputElement;
     const novaCor = input.value.toUpperCase();
     if (novaCor && !this.coresCadastradas.includes(novaCor)) {
       this.coresCadastradas.push(novaCor);
-      // Seleciona a cor recém-cadastrada (adiciona à seleção do produto)
       this.toggleCor(novaCor);
     }
-    input.value = '#000000'; // Reseta o input de cor
+    input.value = '#000000';
   }
 
-  // ... (Outros métodos - toggleTamanho, cadastrarNovaMarca, formatarValor, salvar, redireciona - mantidos) ...
   toggleTamanho(tamanhoValor: string) {
     const index = this.produto.tamanho.indexOf(tamanhoValor);
     if (index > -1) {
@@ -183,18 +167,16 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     if (novaMarcaNome && novaMarcaNome.trim() !== '') {
       const nomeMarca = novaMarcaNome.trim();
 
-      // Verifica se já existe na lista atual
       if (this.marcasDisponiveis.includes(nomeMarca)) {
         alert(`A marca ${nomeMarca} já está cadastrada.`);
         this.produto.marca = nomeMarca;
         return;
       }
 
-      // Insere na API e atualiza a lista
       this.service.inserirMarca({ nome: nomeMarca }).subscribe({
         next: (marcaInserida) => {
           this.marcasDisponiveis.push(marcaInserida.nome);
-          this.produto.marca = marcaInserida.nome; // Seleciona a nova marca
+          this.produto.marca = marcaInserida.nome; 
           alert(`Marca ${marcaInserida.nome} cadastrada com sucesso!`);
         },
         error: (err) => console.error('Erro ao cadastrar marca:', err)
@@ -217,24 +199,21 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
 
 
   salvar() {
-    // REQUISITO: Persistir cores e tamanhos como string separada por vírgula para o json-server
     const produtoParaAPI = {
       ...this.produto,
       tamanho: this.produto.tamanho.join(','),
-      cor: this.produto.cor.join(','), // Converte array de cores para string
+      cor: this.produto.cor.join(','), 
       id: this.produto.id && this.produto.id !== 0 ? this.produto.id : undefined
     } as unknown as Produtos & { imagem: string };
 
     const { id, ...produtoParaInserir } = produtoParaAPI;
 
     if (this.produto.id && this.produto.id !== 0) {
-      // Lógica PUT (Edição)
       this.service.atualizar(produtoParaAPI).subscribe({
         next: () => this.redireciona(),
         error: (err) => console.error('Erro ao editar:', err)
       });
     } else {
-      // Lógica POST (Criação)
       this.service.inserir(produtoParaInserir as unknown as Produtos).subscribe({
         next: () => this.redireciona(),
         error: (err) => console.error('Erro ao cadastrar:', err)

@@ -33,16 +33,13 @@ export class ProdCadastroComponent implements OnInit {
       return '';
     }
 
-    // 1. Converte para array (se for string separada por vírgula da API)
     const tamanhosArray = Array.isArray(tamanho) ? tamanho : (tamanho as string).split(',');
 
-    // 2. Filtra e ordena de acordo com a ordem de referência
     const tamanhosOrdenados = tamanhosArray
       .map(t => t.trim().toUpperCase()) 
       .filter(t => TAMANHOS_ORDEM.includes(t)) 
       .sort((a, b) => TAMANHOS_ORDEM.indexOf(a) - TAMANHOS_ORDEM.indexOf(b));
 
-    // 3. Junta com espaço após a vírgula: "P, M, G, GG"
     return tamanhosOrdenados.join(', ');
   }
 

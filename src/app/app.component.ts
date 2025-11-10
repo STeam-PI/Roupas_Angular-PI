@@ -1,14 +1,33 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent } from './shared/header/header.component'; 
+import { FooterComponent } from './shared/footer/footer.component'; 
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+
+// --- MUDANÇA 1 ---
+// Em vez de importar o pack inteiro (fas), 
+// importamos apenas o ícone de que precisamos.
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  standalone: true,
+  imports: [
+    RouterOutlet, 
+    HeaderComponent, 
+    FooterComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Roupas_angular-PI';
+  title = 'roupas-angular-pi';
+
+  constructor(library: FaIconLibrary) {
+    // --- MUDANÇA 2 ---
+    // Adicionamos apenas o ícone específico à biblioteca.
+    // Isto é mais eficiente e resolve problemas de registo.
+    library.addIcons(faShoppingCart);
+  }
 }

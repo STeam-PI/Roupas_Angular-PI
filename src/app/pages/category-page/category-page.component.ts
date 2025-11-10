@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { TitleCasePipe } from '@angular/common';
 import { ProdutosService } from '../../core/services/produtos.service'; 
@@ -27,9 +27,22 @@ export class CategoryPageComponent implements OnInit {
   ngOnInit(): void {
     this.produtos$ = this.route.paramMap.pipe(
       switchMap(params => {
-        const categoria = params.get('categoria')!; 
+        const categoria = params.get('categoria'); 
+        
+        // Se não houver categoria na URL, retorna um array vazio
+        if (!categoria) {
+          this.categoriaTitulo = 'Erro';
+          return of([]);
+        }
+
         this.categoriaTitulo = categoria;
-        return this.produtosService.getProdutosPorCategoria(categoria);
+        
+        // --- LÓGICA DE FILTRO ---
+        if (categoria === 'lancamentos') {
+          return this.produtosService.getLancamentos();
+        } else {
+          return this.produtosService.getProdutosPorCategoria(categoria);
+        }
       })
     );
   }

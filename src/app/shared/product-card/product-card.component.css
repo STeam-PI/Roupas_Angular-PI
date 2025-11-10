@@ -73,8 +73,79 @@
   background-color: #e0b04a; /* Um tom um pouco mais claro */
 }
 
-/* Se você usar um ícone Font Awesome, talvez precise de alguns ajustes */
 .add-to-cart-btn i {
-  /* Tamanho e cor do ícone Font Awesome */
   font-size: 1rem;
 }
+
+
+:host a .product-card {
+  position: relative;
+  display: block; /* Garante que o <a> se comporte como um bloco */
+  text-decoration: none; /* Remove sublinhado do link */
+  color: inherit; /* Herda a cor do texto padrão */
+}
+
+/*
+ * Estilos para o botão circular.
+ */
+.add-to-cart-btn {
+  /* Posicionamento Absoluto */
+  position: absolute;
+  bottom: 1rem; /* 16px da parte inferior */
+  right: 1rem;  /* 16px da direita */
+  
+  /* Cor e Aspeto */
+  background-color: #D5AD3B; /* O seu dourado principal */
+  border: none;
+  border-radius: 50%; /* Deixa o botão perfeitamente redondo */
+  
+  /* Tamanho */
+  width: 44px;  /* Tamanho de toque recomendado */
+  height: 44px;
+  
+  /* Sombra para dar profundidade */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  
+  /* Centrar o ícone */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Animações */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-info {
+  /* * O botão tem 44px de largura + 1rem (16px) de espaço à direita.
+   * Vamos definir um preenchimento de 60px para o texto não
+   * chegar nessa área.
+   */
+  padding-right: 60px;
+}
+
+/*
+ * Efeito "Hover": O botão cresce ligeiramente e a sombra aumenta.
+ */
+.add-to-cart-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/*
+ * Efeito "Active": O botão encolhe ao ser clicado.
+ */
+.add-to-cart-btn:active {
+  transform: scale(0.95);
+  transition-duration: 0.1s;
+}
+
+/*
+ * *** A CORREÇÃO MAIS IMPORTANTE ***
+ * Estiliza o <fa-icon> dentro do botão.
+ */
+.add-to-cart-btn fa-icon {
+  font-size: 1.1rem; /* Tamanho do ícone de carrinho */
+  color: #1a1a1a;     /* Cor do ícone (preto suave). Mude para "white" se preferir. */
+}
+

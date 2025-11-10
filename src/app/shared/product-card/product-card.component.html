@@ -6,12 +6,11 @@
 
     <div class="product-info">
       <h3 class="product-name">{{ produto.nome }}</h3>
-      
       <p class="product-price">{{ produto.valor | currency: 'BRL':'symbol':'1.2-2' }}</p>
     </div>
-
+    
     <button class="add-to-cart-btn" (click)="adicionarAoCarrinho(produto); $event.stopPropagation()">
-      🛒
+      <fa-icon [icon]="['fas', 'shopping-cart']"></fa-icon>
     </button>
 
   </div>

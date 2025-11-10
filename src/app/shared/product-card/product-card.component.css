@@ -42,3 +42,39 @@
   color: #000;
   margin: 0;
 }
+
+/* src/app/shared/product-card/product-card.component.css */
+
+.product-card {
+  position: relative; /* Importante para posicionamento absoluto */
+  /* ... seus estilos existentes para o card */
+}
+
+.add-to-cart-btn {
+  position: absolute;
+  bottom: 10px; /* Ajuste conforme necessário */
+  right: 10px; /* Ajuste conforme necessário */
+  background-color: #D5AD3B; /* Cor do seu projeto */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Para deixá-lo redondo */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #e0b04a; /* Um tom um pouco mais claro */
+}
+
+/* Se você usar um ícone Font Awesome, talvez precise de alguns ajustes */
+.add-to-cart-btn i {
+  /* Tamanho e cor do ícone Font Awesome */
+  font-size: 1rem;
+}

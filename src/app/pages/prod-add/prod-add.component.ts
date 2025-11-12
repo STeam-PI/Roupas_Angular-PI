@@ -3,55 +3,50 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProdutosService } from '../../core/services/produtos.service';
-import { Produtos } from '../../core/types/types'; // Assumindo que 'Produtos' está aqui
+import { Produtos, Marca } from '../../core/types/types';
 
-// Tipo auxiliar para permitir que o 'id' seja opcional ou 0
-type ProdutoParaFormulario = Omit<Produtos, 'id'> & { id?: String | number; };
-// Tipagem para opções de Tamanho
-type TamanhoOpcao = { valor: string, label: string, tipo: 'roupa' | 'calcado' };
+type ProdutoParaFormulario = Omit<Produtos, 'id' | 'tamanho' | 'cor'> & {
+  id?: String | number;
+  tamanho: string[]; 
+  cor: string[];   
+  imagem: string;
+};
+
+type TamanhoOpcao = { valor: string, label: string };
 
 @Component({
   selector: 'app-prod-add',
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule],
   standalone: true,
   templateUrl: './prod-add.component.html',
   styleUrl: './prod-add.component.css'
 })
 export class ProdAddComponent implements OnInit, AfterViewInit {
   produto: ProdutoParaFormulario = {
-    id: 0, 
+    id: 0,
     nome: '',
-    cor: '', // Armazena a cor hexadecimal selecionada
-    tamanho: '', // Armazena o tamanho selecionado (P, M, G ou 36, 37, 38...)
+    cor: [], 
+    tamanho: [],
     marca: '',
     valor: 0,
     categoria: '',
-    imagemUrl: ''
+    imagem: ''
   };
-  
-  // Listas Dinâmicas (Simuladas - idealmente viriam de um service)
-  marcasDisponiveis: string[] = ['Nike', 'Adidas', 'Puma', 'Levis', 'Approve', 'Gap'];
-  coresCadastradas: string[] = ['#000000', '#FFD700', '#FFFFFF']; 
-  
-  tamanhosOpcoes: TamanhoOpcao[] = [
-    { valor: 'P', label: 'P', tipo: 'roupa' },
-    { valor: 'M', label: 'M', tipo: 'roupa' },
-    { valor: 'G', label: 'G', tipo: 'roupa' },
-    { valor: 'GG', label: 'GG', tipo: 'roupa' },
-    { valor: '36', label: '36', tipo: 'calcado' },
-    { valor: '37', label: '37', tipo: 'calcado' },
-    { valor: '38', label: '38', tipo: 'calcado' },
-    { valor: '39', label: '39', tipo: 'calcado' },
-    { valor: '40', label: '40', tipo: 'calcado' },
-  ];
-  
-  // Variável de controle para alternar entre "roupa" e "calçado"
-  tipoTamanhoSelecionado: 'roupa' | 'calcado' = 'roupa';
 
-  // Getter para facilitar a filtragem no template (substitui o pipe)
-  get tamanhosFiltrados(): TamanhoOpcao[] {
-    return this.tamanhosOpcoes.filter(t => t.tipo === this.tipoTamanhoSelecionado);
-  }
+  marcasDisponiveis: string[] = [];
+  coresCadastradas: string[] = []; 
+
+  tamanhosOpcoes: TamanhoOpcao[] = [
+    { valor: 'P', label: 'P' },
+    { valor: 'M', label: 'M' },
+    { valor: 'G', label: 'G' },
+    { valor: 'GG', label: 'GG' },
+  ];
+
+  valorFormatado: string = '0,00';
+  private uploadArea: HTMLElement | null = null;
+  private inputImg: HTMLInputElement | null = null;
+
 
   constructor(
     private router: Router,
@@ -60,89 +55,167 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    // Tenta obter o parâmetro 'id' da rota
     const idParam = this.route.snapshot.paramMap.get('id');
+    this.service.listarMarcas().subscribe(marcas => {
+      this.marcasDisponiveis = marcas.map(m => m.nome);
 
-    // Verifica se temos um ID válido para a Edição
-    if (idParam) {
-      // Se for edição, busca os dados do produto.
-      this.service.buscarPorId(idParam).subscribe(prod => {
-        if (prod) {
-          // Atribui os dados do produto retornado
-          this.produto = prod; 
-          // ... Lógica para determinar o tipo de tamanho (mantida) ...
-          const tamanhoCarregado = this.tamanhosOpcoes.find(t => t.valor === prod.tamanho);
-          if (tamanhoCarregado) {
-            this.tipoTamanhoSelecionado = tamanhoCarregado.tipo;
+      if (idParam) {
+        this.service.buscarPorId(idParam).subscribe(prod => {
+          if (prod) {
+            
+            this.produto = {
+              ...prod,
+              tamanho: Array.isArray(prod.tamanho) ? prod.tamanho : (prod.tamanho ? (prod.tamanho as string).split(',') : []),
+              cor: Array.isArray(prod.cor) ? prod.cor : (prod.cor ? (prod.cor as string).split(',') : []),
+              imagem: (prod as any).imagem || ''
+            };
+
+            this.produto.cor.forEach(c => {
+              if (c && !this.coresCadastradas.includes(c)) {
+                this.coresCadastradas.push(c);
+              }
+            });
+
+            this.formatarValor(this.produto.valor);
+
+            this.uploadArea = document.getElementById("upload-area") as HTMLElement;
+            this.updateImagePreview(this.produto.imagem);
           }
-        }
-      });
+        });
+      } else {
+        this.formatarValor(this.produto.valor);
+      }
+    });
+  }
+
+  updateImagePreview(base64Image: string) {
+    if (!this.uploadArea) return;
+
+    if (base64Image) {
+      this.uploadArea.style.backgroundImage = `url('${base64Image}')`;
+      this.uploadArea.classList.add("has-image");
     } else {
-      
+      this.uploadArea.style.backgroundImage = 'none';
+      this.uploadArea.classList.remove("has-image");
     }
   }
 
   ngAfterViewInit(): void {
-    // 1. Lógica de Upload de Imagem (mantida)
-    const inputImg = document.getElementById("item-image") as HTMLInputElement;
-    const uploadArea = document.getElementById("upload-area") as HTMLElement;
+    this.inputImg = document.getElementById("item-image") as HTMLInputElement;
+    this.uploadArea = document.getElementById("upload-area") as HTMLElement;
 
-    inputImg?.addEventListener("change", () => {
-      const file = inputImg.files?.[0];
+    this.inputImg?.addEventListener("change", () => {
+      const file = this.inputImg?.files?.[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = e => {
-          const imageUrl = e.target?.result as string;
-
-          uploadArea.style.backgroundImage = `url('${imageUrl}')`;
-          uploadArea.classList.add("has-image");
+          const base64Image = e.target?.result as string;
+          this.produto.imagem = base64Image;
+          // Chamar o método centralizado
+          this.updateImagePreview(base64Image);
         };
         reader.readAsDataURL(file);
       }
     });
-
-    // 2. Lógica de Seleção de Tamanhos (via JS Puro) REMOVIDA
-    // A classe 'active' para os tamanhos será agora gerenciada via Angular no HTML
-    // usando [class.active]="produto.tamanho === tamanho.valor".
   }
-  
-  // Requisito: Adicionar nova cor
+
+  toggleCor(corValor: string) {
+    const index = this.produto.cor.indexOf(corValor);
+    if (index > -1) {
+      this.produto.cor.splice(index, 1);
+    } else {
+      this.produto.cor.push(corValor);
+    }
+  }
+
+  removerCor(corValor: string) {
+    if (!confirm(`Tem certeza que deseja remover a cor ${corValor} da lista de cores disponíveis?`)) {
+      return;
+    }
+
+    const cadastradasIndex = this.coresCadastradas.indexOf(corValor);
+    if (cadastradasIndex > -1) {
+      this.coresCadastradas.splice(cadastradasIndex, 1);
+    }
+
+    const produtoIndex = this.produto.cor.indexOf(corValor);
+    if (produtoIndex > -1) {
+      this.produto.cor.splice(produtoIndex, 1);
+    }
+  }
+
   adicionarNovaCor(event: Event) {
     const input = event.target as HTMLInputElement;
     const novaCor = input.value.toUpperCase();
     if (novaCor && !this.coresCadastradas.includes(novaCor)) {
       this.coresCadastradas.push(novaCor);
-      this.produto.cor = novaCor; // Seleciona a cor recém-cadastrada
+      this.toggleCor(novaCor);
     }
-    input.value = '#000000'; // Reseta o input de cor
+    input.value = '#000000';
   }
 
-  // Requisito: Cadastrar nova marca
+  toggleTamanho(tamanhoValor: string) {
+    const index = this.produto.tamanho.indexOf(tamanhoValor);
+    if (index > -1) {
+      this.produto.tamanho.splice(index, 1);
+    } else {
+      this.produto.tamanho.push(tamanhoValor);
+    }
+  }
+
   cadastrarNovaMarca() {
-    const novaMarca = prompt("Digite o nome da nova marca:");
-    if (novaMarca && novaMarca.trim() !== '' && !this.marcasDisponiveis.includes(novaMarca.trim())) {
-      this.marcasDisponiveis.push(novaMarca.trim());
-      this.produto.marca = novaMarca.trim(); // Seleciona a nova marca
+    const novaMarcaNome = prompt("Digite o nome da nova marca:");
+    if (novaMarcaNome && novaMarcaNome.trim() !== '') {
+      const nomeMarca = novaMarcaNome.trim();
+
+      if (this.marcasDisponiveis.includes(nomeMarca)) {
+        alert(`A marca ${nomeMarca} já está cadastrada.`);
+        this.produto.marca = nomeMarca;
+        return;
+      }
+
+      this.service.inserirMarca({ nome: nomeMarca }).subscribe({
+        next: (marcaInserida) => {
+          this.marcasDisponiveis.push(marcaInserida.nome);
+          this.produto.marca = marcaInserida.nome; 
+          alert(`Marca ${marcaInserida.nome} cadastrada com sucesso!`);
+        },
+        error: (err) => console.error('Erro ao cadastrar marca:', err)
+      });
     }
   }
 
-  // Requisito: Alternar Tipo de Tamanho
-  alternarTipoTamanho(tipo: 'roupa' | 'calcado') {
-    this.tipoTamanhoSelecionado = tipo;
-    this.produto.tamanho = ''; // Limpa o tamanho ao alternar o tipo
+  aplicarMascaraValor() {
+    const valorLimpo = this.valorFormatado.replace(/\D/g, '');
+    let valorEmCentavos = parseInt(valorLimpo, 10);
+    if (isNaN(valorEmCentavos)) valorEmCentavos = 0;
+    this.produto.valor = valorEmCentavos / 100;
+    this.valorFormatado = this.produto.valor.toFixed(2).replace('.', ',');
   }
+
+  formatarValor(valor: number) {
+    this.produto.valor = valor;
+    this.valorFormatado = valor.toFixed(2).replace('.', ',');
+  }
+
 
   salvar() {
+    const produtoParaAPI = {
+      ...this.produto,
+      tamanho: this.produto.tamanho.join(','),
+      cor: this.produto.cor.join(','), 
+      id: this.produto.id && this.produto.id !== 0 ? this.produto.id : undefined
+    } as unknown as Produtos & { imagem: string };
+
+    const { id, ...produtoParaInserir } = produtoParaAPI;
+
     if (this.produto.id && this.produto.id !== 0) {
-      // Lógica PUT (Edição)
-      this.service.atualizar(this.produto as Produtos).subscribe({
+      this.service.atualizar(produtoParaAPI).subscribe({
         next: () => this.redireciona(),
         error: (err) => console.error('Erro ao editar:', err)
       });
     } else {
-      // Lógica POST (Criação)
-      const { id, ...produtoParaInserir } = this.produto; 
-      this.service.inserir(produtoParaInserir as Produtos).subscribe({
+      this.service.inserir(produtoParaInserir as unknown as Produtos).subscribe({
         next: () => this.redireciona(),
         error: (err) => console.error('Erro ao cadastrar:', err)
       });

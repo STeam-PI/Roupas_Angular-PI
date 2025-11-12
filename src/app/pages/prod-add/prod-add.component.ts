@@ -29,6 +29,7 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     tamanho: [],
     marca: '',
     valor: 0,
+    categoria: '',
     imagem: ''
   };
 

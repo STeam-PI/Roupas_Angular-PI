@@ -41,7 +41,17 @@ export class ProdutosService {
     return this.http.put<Produtos>(url, produto);
   }
 
-  excluir(id: String | number): Observable<void> {
-    return this.http.delete<void>(this.PRODUTOS_API+`/${id}`);
+  excluir(id: string | number): Observable<void> {
+    return this.http.delete<void>(this.PRODUTOS_API + `/${id}`);
+  }
+
+  getLancamentos(): Observable<Produtos[]> {
+    const url = `${this.PRODUTOS_API}?_sort=id&_order=desc`;
+    return this.http.get<Produtos[]>(url);
+  }
+
+  getProdutosPorCategoria(categoria: string): Observable<Produtos[]> {
+    const url = `${this.PRODUTOS_API}?categoria=${categoria}`;
+    return this.http.get<Produtos[]>(url);
   }
 }

@@ -52,7 +52,7 @@ h1 {
 
 .upload-area {
   width: 450px;
-  height: 435px;
+  height: 520px;
   border: 2px dashed #aaa;
   border-radius: 8px;
   background: #f9f9f9;
@@ -140,14 +140,14 @@ input[type="number"] {
   margin: 0;
 }
 
-.brand-select {
+.spec-select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
 }
 
-.insert-brand {
+.insert-spec {
   padding: 8px 12px;
   background: #3498db;
   color: #fff;
@@ -157,10 +157,9 @@ input[type="number"] {
   font-weight: bold;
 }
 
-.insert-brand:hover {
+.insert-spec:hover {
   background: #2980b9;
 }
-
 
 /* Cores */
 .item-colors {

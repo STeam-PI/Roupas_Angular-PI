@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Produtos } from '../types/types';
-import { Marca } from '../types/types';
+import { Produtos, Marca, Categoria } from '../types/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutosService {
 
-  // Altera para o endpoint base e usa endpoints específicos para produtos e marcas
+  // Altera para o endpoint base e usa endpoints específicos para produtos, marcas e categorias
   private readonly API = 'http://localhost:3000'; 
   private readonly PRODUTOS_API = `${this.API}/produtos`;
-  private readonly MARCAS_API = `${this.API}/marcas`; 
+  private readonly MARCAS_API = `${this.API}/marcas`;
+  private readonly CATEGORIAS_API = `${this.API}/categorias`; 
   
   constructor (private http: HttpClient) { }
 
@@ -26,6 +26,14 @@ export class ProdutosService {
 
   inserirMarca(marca: Marca): Observable<Marca> {
     return this.http.post<Marca>(this.MARCAS_API, marca);
+  }
+
+  listarCategorias(): Observable<Categoria[]> { 
+    return this.http.get<Categoria[]>(this.CATEGORIAS_API);
+  }
+
+  inserirCategoria(categoria: Categoria): Observable<Categoria> {
+    return this.http.post<Categoria>(this.CATEGORIAS_API, categoria);
   }
 
   buscarPorId(id: String | number): Observable<Produtos | undefined> {

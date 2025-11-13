@@ -3,12 +3,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProdutosService } from '../../core/services/produtos.service';
-import { Produtos, Marca } from '../../core/types/types';
+import { Produtos, Marca, Categoria } from '../../core/types/types';
 
-type ProdutoParaFormulario = Omit<Produtos, 'id' | 'tamanho' | 'cor'> & {
+type ProdutoParaFormulario = Omit<Produtos, 'id' | 'tamanho' | 'cor' | 'categoria'> & {
   id?: String | number;
   tamanho: string[]; 
   cor: string[];   
+  categoria: string;
   imagem: string;
 };
 
@@ -35,6 +36,7 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
 
   marcasDisponiveis: string[] = [];
   coresCadastradas: string[] = []; 
+  categoriasDisponiveis: string[] = [];
 
   tamanhosOpcoes: TamanhoOpcao[] = [
     { valor: 'P', label: 'P' },
@@ -57,7 +59,11 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     this.service.listarMarcas().subscribe(marcas => {
-      this.marcasDisponiveis = marcas.map(m => m.nome);
+      this.marcasDisponiveis = marcas.map(m => m.nome);});
+
+      this.service.listarCategorias().subscribe(categorias => {
+        this.categoriasDisponiveis = categorias.map(c => c.nome);
+    });
 
       if (idParam) {
         this.service.buscarPorId(idParam).subscribe(prod => {
@@ -85,7 +91,6 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
       } else {
         this.formatarValor(this.produto.valor);
       }
-    });
   }
 
   updateImagePreview(base64Image: string) {
@@ -185,6 +190,30 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     }
   }
 
+  cadastrarNovaCategoria() {
+    const novaCategoriaNome = prompt("Digite o nome da nova categoria:");
+    if (novaCategoriaNome && novaCategoriaNome.trim() !== '') {
+      const nomeCategoria = novaCategoriaNome.trim();
+
+      // Verifica se já existe na lista atual
+      if (this.categoriasDisponiveis.includes(nomeCategoria)) {
+        alert(`A categoria ${nomeCategoria} já está cadastrada.`);
+        this.produto.categoria = nomeCategoria;
+        return;
+      }
+
+      // Insere na API e atualiza a lista
+      this.service.inserirCategoria({ nome: nomeCategoria }).subscribe({
+        next: (categoriaInserida) => {
+          this.categoriasDisponiveis.push(categoriaInserida.nome);
+          this.produto.categoria = categoriaInserida.nome; // Seleciona a nova categoria
+          alert(`Categoria ${categoriaInserida.nome} cadastrada com sucesso!`);
+        },
+        error: (err) => console.error('Erro ao cadastrar categoria:', err)
+      });
+    }
+  }
+
   aplicarMascaraValor() {
     const valorLimpo = this.valorFormatado.replace(/\D/g, '');
     let valorEmCentavos = parseInt(valorLimpo, 10);
@@ -197,7 +226,6 @@ export class ProdAddComponent implements OnInit, AfterViewInit {
     this.produto.valor = valor;
     this.valorFormatado = valor.toFixed(2).replace('.', ',');
   }
-
 
   salvar() {
     const produtoParaAPI = {

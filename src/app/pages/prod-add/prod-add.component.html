@@ -67,12 +67,25 @@
         <div class="detail-block">
           <p class="label">Marca:</p>
           <div style="display: flex; gap: 10px; align-items: center;">
-            <select class="brand-select" [(ngModel)]="produto.marca" name="marca" required>
+            <select class="spec-select" [(ngModel)]="produto.marca" name="marca" required>
               <option value="" disabled>Selecione...</option>
               <option *ngFor="let marca of marcasDisponiveis" [value]="marca">{{ marca }}</option>
             </select>
 
-            <button type="button" class="insert-brand" (click)="cadastrarNovaMarca()">+ Marca</button>
+            <button type="button" class="insert-spec" (click)="cadastrarNovaMarca()">+ Marca</button>
+          </div>
+        </div>
+        <hr>
+
+        <div class="detail-block">
+          <p class="label">Categoria:</p>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <select class="spec-select" [(ngModel)]="produto.categoria" name="categoria" required>
+              <option value="" disabled>Selecione...</option>
+              <option *ngFor="let categoria of categoriasDisponiveis" [value]="categoria">{{ categoria }}</option>
+            </select>
+
+            <button type="button" class="insert-spec" (click)="cadastrarNovaCategoria()">+ Categoria</button>
           </div>
         </div>
         <hr>

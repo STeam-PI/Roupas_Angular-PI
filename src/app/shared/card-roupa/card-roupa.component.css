@@ -24,6 +24,9 @@
   background-color: black;
   color: #fff;
   padding: 15px 30px;
+  min-height: 81px;
+  display: flex;
+  align-items: center;
 }
 
 .card .card-text p {

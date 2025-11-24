@@ -8,16 +8,16 @@
   <section class="section-lancamentos" id="lancamentos">
     <h2>ÚLTIMOS LANÇAMENTOS →</h2>
     <div class="grid-lancamentos">
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
+      <ng-container *ngIf="produtosLancamento$ | async as produtosLancamento">
+        @for (item of produtosLancamento; track item) {
+        <app-card-roupa [produto]="item"></app-card-roupa>
+        }
+      </ng-container>
     </div>
   </section>
 
   <section class="section-colecao" id="ultima-colecao">
-    <img src="assets/images/camisa_xpto.png" alt="Última Coleção">
+    <img src="assets/images/capa.jpeg" alt="Última Coleção">
     <div class="banner-cover banner-content"></div>
     <div class="colecao-overlay">
       <h2>CONHEÇA A ÚLTIMA COLEÇÃO</h2>
@@ -30,11 +30,11 @@
   <section class="section-lancamentos" id="destaques">
     <h2>PRODUTOS EM DESTAQUE →</h2>
     <div class="grid-lancamentos">
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
-      <app-card-roupa></app-card-roupa>
+      <ng-container *ngIf="produtosDestaque$ | async as produtosDestaque">
+        @for (item of produtosDestaque; track item) {
+        <app-card-roupa [produto]="item"></app-card-roupa>
+        }
+      </ng-container>
     </div>
   </section>
 

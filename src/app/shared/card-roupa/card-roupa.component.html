@@ -1,6 +1,6 @@
 <div class="card">
-  <img src="assets/images/camisa_xpto.png" alt="camisa">
+  <img [src]="produto.imagem" [alt]="produto.nome">
   <div class="card-text">
-    <p>CAMISETA BOXY - MAYBE LATER<br><span>R$119,99</span></p>
+    <p>{{produto.nome}}<br><span>{{ produto.valor | currency: 'BRL':'symbol':'1.2-2' }}</span></p>
   </div>
 </div>

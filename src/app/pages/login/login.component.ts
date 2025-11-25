@@ -23,15 +23,15 @@ export class LoginComponent {
 
   onSubmit() {
     // A verificação de campos vazios já é feita no getter, mas mantemos a verificação de segurança
-    if (this.login.trim() !== '' && this.senha.trim() !== '') { //
-      if (this.login === 'admin' && this.senha === '123') { //
+    if (this.formulario.get('login')?.value?.trim() !== '' && this.formulario.get('senha')?.value?.trim() !== '') { //
+      if (this.formulario.get('login')?.value === 'admin' && this.formulario.get('senha')?.value === '123') { //
         this.router.navigate(['roupas/listagem']); //
       }
-      else if (this.login === 'user' && this.senha !== '') { //
+      else if (this.formulario.get('login')?.value === 'user' && this.formulario.get('senha')?.value?.trim() !== '') { //
         alert('Login Usuario efetuado com sucesso!'); //
         this.router.navigate(['']); //
       }
-      else if (this.login !== 'admin' && this.login !== 'user') { //
+      else if (this.formulario.get('login')?.value !== 'admin' && this.formulario.get('login')?.value !== 'user') { //
         alert('Login ou senha incorretos!'); //
       }
     } else {

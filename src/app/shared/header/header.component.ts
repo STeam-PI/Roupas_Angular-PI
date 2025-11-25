@@ -28,6 +28,10 @@ export class HeaderComponent {
     });
   }
 
+  get usuario(): string | null {
+    return localStorage.getItem('usuario');
+  }
+
   toggleMenu() {
     const nav = document.getElementById('headerNav');
     nav?.classList.toggle('menu-open');

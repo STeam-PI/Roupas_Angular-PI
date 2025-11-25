@@ -63,3 +63,19 @@ button {
 button:hover {
   background: #b68c1b;
 }
+
+.form-group .form-error {
+  color: red;
+  font-size: 0.85rem;
+  width: 100%;
+  text-align: left;
+}
+
+.btn-disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-disabled:hover {
+  background: #ccc;
+}

@@ -1,17 +1,28 @@
 <div class="form-container">
   <h2>Entre em sua conta</h2>
 
-  <form action="">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input type="text" placeholder="Digite o seu login" name="login" [(ngModel)]="login" />
+      @if (formulario.get('login')?.hasError('required')) {
+      <div class="form-error"><span>Login é obrigatório</span></div>
+      }
+      @if (formulario.get('login')?.hasError('minlength')) {
+      <div class="form-error"><span>Mínimo de 4 caracteres</span></div>
+      }
+      <input type="text" placeholder="Digite o seu login" formControlName="login" />
     </div>
     <div class="form-group">
-      <input type="password" placeholder="Digite a sua senha" name="senha" [(ngModel)]="senha" />
+      @if (formulario.get('senha')?.hasError('required')) {
+      <div class="form-error"><span>Senha é obrigatória</span></div>
+      }
+      @if (formulario.get('senha')?.hasError('minlength')) {
+      <div class="form-error"><span>Mínimo de 3 caracteres</span></div>
+      }
+      <input type="password" placeholder="Digite a sua senha" formControlName="senha" />
     </div>
     <p>Não possui conta ainda? <a href="usuarios/cadastro">Cadastre-se!</a></p>
     <p><a href="#">Esqueci a minha senha</a></p>
-
-    <button type="submit" [disabled]="disabledButton" (click)="onClickLogin()">
+    <button type="submit" [disabled]="formulario.invalid" [class.btn-disabled]="formulario.invalid">
       Entrar
     </button>
   </form>
